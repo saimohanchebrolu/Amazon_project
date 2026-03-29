@@ -10,7 +10,7 @@ products.forEach((product) => {
     <div class="product-container">
       <div class="product-image-container">
         <img class="product-image"
-          src="${product.image}">
+          src="${product.image}"  alt="${product.name}>
       </div>
 
       <div class="product-name limit-text-to-2-lines">
@@ -18,8 +18,10 @@ products.forEach((product) => {
       </div>
 
       <div class="product-rating-container">
-        <img class="product-rating-stars"
-          src="images/ratings/rating-${product.rating.stars * 10}.png">
+        <div class="product-rating-stars">
+          ⭐ ${product.rating.stars}
+        </div>
+
         <div class="product-rating-count link-primary">
           ${product.rating.count}
         </div>
