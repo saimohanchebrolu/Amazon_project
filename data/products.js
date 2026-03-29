@@ -656,5 +656,36 @@ const products = [
       "apparel",
       "mens"
     ]
+  },
+  {
+    id : "id1",
+    image:"images/products/volvo.jpg",
+    name:"Brand New Volvo",
+    rating:{
+      stars: 4.5,
+      count:100,
+    },
+    priceCents:1029300012,
+    keywords:[
+      "cars",
+      "volvo",
+      "sports-car"
+    ] 
+  },
+  {
+    id : "id2",
+    image:"images/products/range-rover.webp",
+    name:"Brand New Range Rover",
+    rating:{
+      stars: 4.3,
+      count:68,
+    },
+    priceCents:907675577,
+    keywords:[
+      "cars",
+      "range-rover",
+      "comfort-car"
+    ] 
   }
+  
 ];

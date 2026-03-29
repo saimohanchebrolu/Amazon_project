@@ -1,7 +1,9 @@
+import { cart as myCart,addToCart} from '../data/cart.js';
+import { products } from '../data/products.js';
 
 
+import {formatCurrency} from './utils/money.js';;
 let productsHTML = '';
-
 
 products.forEach((product) => {
   productsHTML += `
@@ -24,7 +26,7 @@ products.forEach((product) => {
       </div>
 
       <div class="product-price">
-        $${(product.priceCents / 100).toFixed(2)}
+        $${formatCurrency(product.priceCents)}
       </div>
 
       <div class="product-quantity-container">
@@ -42,7 +44,7 @@ products.forEach((product) => {
         </select>
       </div>
 
-      <div class="product-spacer"></div>
+      <div class="product-spacer"></div> 
 
       <div class="added-to-cart">
         <img src="images/icons/checkmark.png">
@@ -55,52 +57,32 @@ products.forEach((product) => {
       </button>
     </div>
   `;
-
 });
 
 
 
-document.querySelector('.js-products-grid').
-innerHTML = productsHTML; 
+function updateCartQuantity() {
+  let cartQuantity = 0;
+ 
+  // ✅ changed cart → myCart
+  myCart.forEach((cartitem) => {
+    cartQuantity += cartitem.quantity;
+  });
 
+  document.querySelector('.js-cart-quantity')
+    .innerHTML = cartQuantity;
+}
+
+// ✅ VERY IMPORTANT (render first)
+document.querySelector('.js-products-grid').innerHTML = productsHTML;
+
+// ✅ then add event listeners
 document.querySelectorAll('.js-add-to-cart')
   .forEach((button) => {
     button.addEventListener('click',() => {
-      const productId = button.dataset.
-      productId;
+      const productId = button.dataset.productId;
 
-      let matchingItem;
-
-
-      cart.forEach((item) => {
-        if(productId === item.productId){
-          matchingItem = item;
-        }
-      });
-
-      const quantitySelector = document.querySelector(`.js-quantity-selector-${productId}`);
-
-      const quantity = Number(quantitySelector.value);
-
-      if(matchingItem) {
-        matchingItem.quantity += quantity;
-      } else {
-        cart.push({
-          productId : productId,
-          quantity : quantity
-        });
-      }
-
-      let cartQuantity = 0;
-
-
-      cart.forEach((item) => {
-        cartQuantity += item.quantity;
-      });
-
-
-      document.querySelector('.js-cart-quantity')
-        .innerHTML = cartQuantity;
-
+      addToCart(productId);
+      updateCartQuantity();
     });
-  });
+});
