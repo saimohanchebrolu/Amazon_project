@@ -9,10 +9,13 @@ from models.product import Product
 from models.user import User
 from models.cart import Cart
 from models.cart_item import CartItem
+from models.order import Order
+from models.order_item import OrderItem
 
 from routes.products import product_bp
 from routes.auth import auth_bp
 from routes.cart import cart_bp
+from routes.orders import orders_bp
 
 app = Flask(__name__)
 
@@ -27,6 +30,7 @@ db.init_app(app)
 app.register_blueprint(product_bp, url_prefix="/api")
 app.register_blueprint(auth_bp, url_prefix="/api/auth")
 app.register_blueprint(cart_bp, url_prefix="/api/cart")
+app.register_blueprint(orders_bp, url_prefix="/api/orders")
 
 
 @app.route("/")
