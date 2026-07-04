@@ -5,31 +5,28 @@ from flask_jwt_extended import JWTManager
 from config import Config
 from database import db
 
-# Import Models
 from models.product import Product
 from models.user import User
+from models.cart import Cart
+from models.cart_item import CartItem
 
-# Import Routes
 from routes.products import product_bp
 from routes.auth import auth_bp
+from routes.cart import cart_bp
 
 app = Flask(__name__)
 
-# Load Configuration
 app.config.from_object(Config)
 
-# Enable CORS
 CORS(app)
 
-# Initialize JWT
 jwt = JWTManager(app)
 
-# Initialize Database
 db.init_app(app)
 
-# Register Blueprints
 app.register_blueprint(product_bp, url_prefix="/api")
 app.register_blueprint(auth_bp, url_prefix="/api/auth")
+app.register_blueprint(cart_bp, url_prefix="/api/cart")
 
 
 @app.route("/")
