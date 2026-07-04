@@ -1,10 +1,13 @@
-from flask import Flask, jsonify
+from flask import Flask
 from flask_cors import CORS
-import json
+
+from routes.products import product_bp
 
 app = Flask(__name__)
 
 CORS(app)
+
+app.register_blueprint(product_bp)
 
 
 @app.route("/")
@@ -12,14 +15,6 @@ def home():
     return {
         "message": "Amazon Backend API is running successfully"
     }
-
-
-@app.route("/api/products")
-def get_products():
-    with open("products.json", "r", encoding="utf-8") as file:
-        products = json.load(file)
-
-    return jsonify(products)
 
 
 if __name__ == "__main__":
