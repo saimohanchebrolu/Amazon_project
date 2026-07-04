@@ -1,4 +1,3 @@
-class Database:
+from flask_sqlalchemy import SQLAlchemy
 
-    def connect(self):
-        print("Database Connected")
+db = SQLAlchemy()
