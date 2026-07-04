@@ -9,14 +9,33 @@ class Product(db.Model):
 
     name = db.Column(db.String(255), nullable=False)
 
-    description = db.Column(db.Text)
-
-    price = db.Column(db.Float)
-
     image = db.Column(db.String(500))
-
-    category = db.Column(db.String(100))
 
     rating = db.Column(db.Float)
 
-    stock = db.Column(db.Integer)
+    ratings_count = db.Column(db.Integer)
+
+    price = db.Column(db.Float)
+
+    keywords = db.Column(db.Text)
+
+    description = db.Column(db.Text)
+
+    category = db.Column(db.String(100))
+
+    stock = db.Column(db.Integer, default=100)
+
+    def to_dict(self):
+
+        return {
+            "id": self.id,
+            "name": self.name,
+            "image": self.image,
+            "rating": self.rating,
+            "ratings_count": self.ratings_count,
+            "price": self.price,
+            "keywords": self.keywords,
+            "description": self.description,
+            "category": self.category,
+            "stock": self.stock
+        }
